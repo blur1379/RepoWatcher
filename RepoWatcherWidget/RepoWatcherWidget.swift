@@ -60,8 +60,10 @@ struct RepoWatcherWidgetEntryView : View {
                         .lineLimit(1)
                     
                 }
-                
-
+                .padding(.bottom)
+                HStack {
+                    StatLabel(value: 999, systemImageName: "star.fill")
+                    StatLabel(value: 888, systemImageName: "tuningfork")
                 
             }
             VStack {

@@ -47,33 +47,47 @@ struct RepoWatcherWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
+        HStack {
+            VStack {
+                HStack {
+                    Circle()
+                        .frame(width: 50, height: 50)
+                    
+                    Text("Swift news")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .minimumScaleFactor(0.6)
+                        .lineLimit(1)
+                    
+                }
+                
 
-            Text("Emoji:")
-            Text(entry.emoji)
+                
+            }
+            VStack {
+                Text("99")
+            }
         }
     }
 }
 
 struct RepoWatcherWidget: Widget {
-    let kind: String = "RepoWatcherWidget"
+let kind: String = "RepoWatcherWidget"
 
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                RepoWatcherWidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-            } else {
-                RepoWatcherWidgetEntryView(entry: entry)
-                    .padding()
-                    .background()
-            }
+var body: some WidgetConfiguration {
+    StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        if #available(iOS 17.0, *) {
+            RepoWatcherWidgetEntryView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+        } else {
+            RepoWatcherWidgetEntryView(entry: entry)
+                .padding()
+                .background()
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
     }
+    .configurationDisplayName("My Widget")
+    .description("This is an example widget.")
+}
 }
 
 #Preview(as: .systemSmall) {

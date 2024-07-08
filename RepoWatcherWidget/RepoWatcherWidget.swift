@@ -96,3 +96,19 @@ var body: some WidgetConfiguration {
     SimpleEntry(date: .now, emoji: "😀")
     SimpleEntry(date: .now, emoji: "🤩")
 }
+
+fileprivate struct StatLabel: View {
+    
+    let value: Int
+    let systemImageName: String
+    
+    var body: some View {
+        Label {
+            Text("\(value)")
+        } icon: {
+            Image(systemName: systemImageName)
+                .foregroundStyle(.green)
+        }
+
+    }
+}

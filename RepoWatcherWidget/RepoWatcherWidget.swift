@@ -64,10 +64,25 @@ struct RepoWatcherWidgetEntryView : View {
                 HStack {
                     StatLabel(value: 999, systemImageName: "star.fill")
                     StatLabel(value: 888, systemImageName: "tuningfork")
+                    StatLabel(value: 555, systemImageName: "exclamationmark.triangle.fill")
+                }
                 
             }
+            
+            Spacer()
+            
             VStack {
                 Text("99")
+                    .bold()
+                    .font(.system(size: 70))
+                    .frame(width: 90)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+                
+                Text("days ago")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                
             }
         }
     }

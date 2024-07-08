@@ -105,10 +105,12 @@ fileprivate struct StatLabel: View {
     var body: some View {
         Label {
             Text("\(value)")
+                .font(.footnote)
         } icon: {
             Image(systemName: systemImageName)
                 .foregroundStyle(.green)
         }
+        .fontWeight(.medium)
 
     }
 }

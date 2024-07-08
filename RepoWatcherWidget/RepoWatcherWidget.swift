@@ -90,7 +90,7 @@ var body: some WidgetConfiguration {
 }
 }
 
-#Preview(as: .systemSmall) {
+#Preview(as: .systemMedium) {
     RepoWatcherWidget()
 } timeline: {
     SimpleEntry(date: .now, emoji: "😀")

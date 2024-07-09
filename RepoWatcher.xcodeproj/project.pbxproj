@@ -11,6 +11,8 @@
 		A95CB0572C39D39D00385DCB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CB0562C39D39D00385DCB /* ContentView.swift */; };
 		A95CB0592C39D39F00385DCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A95CB0582C39D39F00385DCB /* Assets.xcassets */; };
 		A95CB05C2C39D39F00385DCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A95CB05B2C39D39F00385DCB /* Preview Assets.xcassets */; };
+		A9652F3C2C3DCECC00CDB0C9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */; };
+		A9652F3D2C3DCECC00CDB0C9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */; };
 		A98D480F2C3B1C6F00FA184F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98D480E2C3B1C6E00FA184F /* WidgetKit.framework */; };
 		A98D48112C3B1C6F00FA184F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98D48102C3B1C6F00FA184F /* SwiftUI.framework */; };
 		A98D48142C3B1C6F00FA184F /* RepoWatcherWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98D48132C3B1C6F00FA184F /* RepoWatcherWidgetBundle.swift */; };
@@ -49,6 +51,7 @@
 		A95CB0562C39D39D00385DCB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A95CB0582C39D39F00385DCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A95CB05B2C39D39F00385DCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		A98D480C2C3B1C6E00FA184F /* RepoWatcherWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RepoWatcherWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98D480E2C3B1C6E00FA184F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		A98D48102C3B1C6F00FA184F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -102,6 +105,7 @@
 			children = (
 				A95CB0542C39D39D00385DCB /* RepoWatcherApp.swift */,
 				A95CB0562C39D39D00385DCB /* ContentView.swift */,
+				A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */,
 				A95CB0582C39D39F00385DCB /* Assets.xcassets */,
 				A95CB05A2C39D39F00385DCB /* Preview Content */,
 			);
@@ -239,6 +243,7 @@
 			files = (
 				A95CB0572C39D39D00385DCB /* ContentView.swift in Sources */,
 				A95CB0552C39D39D00385DCB /* RepoWatcherApp.swift in Sources */,
+				A9652F3D2C3DCECC00CDB0C9 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +253,7 @@
 			files = (
 				A98D48162C3B1C6F00FA184F /* RepoWatcherWidget.swift in Sources */,
 				A98D48142C3B1C6F00FA184F /* RepoWatcherWidgetBundle.swift in Sources */,
+				A9652F3C2C3DCECC00CDB0C9 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,7 +46,7 @@ struct RepoWatcherWidgetEntryView : View {
                     Circle()
                         .frame(width: 50, height: 50)
                     
-                    Text("Swift news")
+                    Text(entry.repo.name)
                         .font(.title2)
                         .fontWeight(.semibold)
                         .minimumScaleFactor(0.6)
@@ -55,9 +55,9 @@ struct RepoWatcherWidgetEntryView : View {
                 }
                 .padding(.bottom)
                 HStack {
-                    StatLabel(value: 999, systemImageName: "star.fill")
-                    StatLabel(value: 888, systemImageName: "tuningfork")
-                    StatLabel(value: 555, systemImageName: "exclamationmark.triangle.fill")
+                    StatLabel(value: entry.repo.watchers, systemImageName: "star.fill")
+                    StatLabel(value: entry.repo.forks, systemImageName: "tuningfork")
+                    StatLabel(value: entry.repo.openIssues, systemImageName: "exclamationmark.triangle.fill")
                 }
                 
             }
@@ -65,7 +65,7 @@ struct RepoWatcherWidgetEntryView : View {
             Spacer()
             
             VStack {
-                Text("99")
+                Text("\(calculateDaySinceLastActivity(from: entry.repo.pushedAt))")
                     .bold()
                     .font(.system(size: 70))
                     .frame(width: 90)
@@ -78,6 +78,13 @@ struct RepoWatcherWidgetEntryView : View {
                 
             }
         }
+    }
+    
+    func calculateDaySinceLastActivity(from dateString: String) -> Int {
+        let formatter = ISO8601DateFormatter()
+        let lastActivityDate = formatter.date(from: dateString) ?? .now
+        let daysSinceLastActivity = Calendar.current.dateComponents([.day], from: lastActivityDate, to: .now).day ?? 0
+        return daysSinceLastActivity
     }
 }
 

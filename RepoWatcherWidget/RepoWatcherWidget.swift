@@ -74,6 +74,7 @@ struct RepoWatcherWidgetEntryView : View {
                     .frame(width: 90)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
+                    .foregroundStyle(daysSinceLastActivity > 50 ? Color.pink : Color.green)
                 
                 Text("days ago")
                     .font(.caption)

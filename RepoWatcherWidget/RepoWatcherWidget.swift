@@ -10,19 +10,28 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> RepoEntry {
-        RepoEntry(date: Date(), emoji: "😀", repo: Repository.placeHolder)
+        RepoEntry(date: Date(), repo: Repository.placeHolder, avatarImageData: Data())
     }
 
     func getSnapshot(in context: Context, completion: @escaping (RepoEntry) -> ()) {
-        let entry = RepoEntry(date: Date(), emoji: "😀", repo: Repository.placeHolder)
+        let entry = RepoEntry(date: Date(), repo: Repository.placeHolder, avatarImageData: Data())
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [RepoEntry] = []
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        Task {
+            let nextUpdate = Date().addingTimeInterval(43200) // 12 hours in seconds
+            
+            do {
+                let repo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
+                let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
+                let entry = RepoEntry(date: .now, repo: repo, avatarImageData: avatarImageData ?? Data())
+                let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+                completion(timeline)
+            } catch {
+                print("❌ Error - \(error.localizedDescription)")
+            }
+        }
     }
 
 //    func relevances() async -> WidgetRelevances<Void> {
@@ -32,8 +41,8 @@ struct Provider: TimelineProvider {
 
 struct RepoEntry: TimelineEntry {
     let date: Date
-    let emoji: String
     let repo: Repository
+    let avatarImageData: Data
 }
 
 struct RepoWatcherWidgetEntryView : View {
@@ -46,8 +55,19 @@ struct RepoWatcherWidgetEntryView : View {
         HStack {
             VStack {
                 HStack {
-                    Circle()
-                        .frame(width: 50, height: 50)
+                    if let imageData = UIImage(data: entry.avatarImageData) {
+                        Image(uiImage: imageData)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                    } else {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundStyle(Color.gray)
+                            .frame(width: 50, height: 50)
+                    }
+                  
                     
                     Text(entry.repo.name)
                         .font(.title2)
@@ -60,7 +80,9 @@ struct RepoWatcherWidgetEntryView : View {
                 HStack {
                     StatLabel(value: entry.repo.watchers, systemImageName: "star.fill")
                     StatLabel(value: entry.repo.forks, systemImageName: "tuningfork")
-                    StatLabel(value: entry.repo.openIssues, systemImageName: "exclamationmark.triangle.fill")
+                    if entry.repo.hasIssues {
+                        StatLabel(value: entry.repo.openIssues, systemImageName: "exclamationmark.triangle.fill")
+                    }
                 }
                 
             }
@@ -113,8 +135,8 @@ var body: some WidgetConfiguration {
 #Preview(as: .systemMedium) {
     RepoWatcherWidget()
 } timeline: {
-    RepoEntry(date: .now, emoji: "😀", repo: Repository.placeHolder)
-    RepoEntry(date: .now, emoji: "🤩", repo: Repository.placeHolder)
+    RepoEntry(date: .now, repo: Repository.placeHolder, avatarImageData: Data())
+    RepoEntry(date: .now, repo: Repository.placeHolder, avatarImageData: Data())
 }
 
 fileprivate struct StatLabel: View {

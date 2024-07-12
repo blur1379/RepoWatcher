@@ -18,64 +18,6 @@
             endingLineNumber = "24"
             landmarkName = "getRepo(at:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "19DC2710-6E52-402F-A6E6-2AD3EDC49AF2 - 93a96e83438b10e6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for RepoWatcherWidgetExtension.NetworkManager.getRepo(at: Swift.String) async throws -&gt; RepoWatcherWidgetExtension.Repository"
-                  moduleName = "RepoWatcherWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammadblur/Developer/RepoWatcher/RepoWatcherWidget/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24">
-               </Location>
-               <Location
-                  uuid = "19DC2710-6E52-402F-A6E6-2AD3EDC49AF2 - 36044e80631de9bf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for RepoWatcherWidgetExtension.NetworkManager.getRepo(at: Swift.String) async throws -&gt; RepoWatcherWidgetExtension.Repository"
-                  moduleName = "RepoWatcherWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammadblur/Developer/RepoWatcher/RepoWatcherWidget/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24">
-               </Location>
-               <Location
-                  uuid = "19DC2710-6E52-402F-A6E6-2AD3EDC49AF2 - 68927a1d3c00e4dc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for RepoWatcherWidgetExtension.NetworkManager.getRepo(at: Swift.String) async throws -&gt; RepoWatcherWidgetExtension.Repository"
-                  moduleName = "RepoWatcherWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammadblur/Developer/RepoWatcher/RepoWatcherWidget/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24">
-               </Location>
-               <Location
-                  uuid = "19DC2710-6E52-402F-A6E6-2AD3EDC49AF2 - 24e0fc20357adedf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for RepoWatcherWidgetExtension.NetworkManager.getRepo(at: Swift.String) async throws -&gt; RepoWatcherWidgetExtension.Repository"
-                  moduleName = "RepoWatcherWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammadblur/Developer/RepoWatcher/RepoWatcherWidget/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -92,36 +34,6 @@
             endingLineNumber = "26"
             landmarkName = "getRepo(at:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "48050BB3-5B08-404B-B15B-1F738E429227 - 68927a1d3c00e4a2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for RepoWatcherWidgetExtension.NetworkManager.getRepo(at: Swift.String) async throws -&gt; RepoWatcherWidgetExtension.Repository"
-                  moduleName = "RepoWatcherWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammadblur/Developer/RepoWatcher/RepoWatcherWidget/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26">
-               </Location>
-               <Location
-                  uuid = "48050BB3-5B08-404B-B15B-1F738E429227 - 68927a1d3c00e4a2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for RepoWatcherWidgetExtension.NetworkManager.getRepo(at: Swift.String) async throws -&gt; RepoWatcherWidgetExtension.Repository"
-                  moduleName = "RepoWatcherWidgetExtension.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammadblur/Developer/RepoWatcher/RepoWatcherWidget/NetworkManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

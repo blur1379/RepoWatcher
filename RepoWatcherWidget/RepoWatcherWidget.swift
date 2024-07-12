@@ -47,69 +47,9 @@ struct RepoEntry: TimelineEntry {
 
 struct RepoWatcherWidgetEntryView : View {
     var entry: Provider.Entry
-    let formatter = ISO8601DateFormatter()
-    var daysSinceLastActivity: Int {
-        calculateDaySinceLastActivity(from: entry.repo.pushedAt)
-    }
-    var body: some View {
-        HStack {
-            VStack {
-                HStack {
-                    if let imageData = UIImage(data: entry.avatarImageData) {
-                        Image(uiImage: imageData)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                    } else {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundStyle(Color.gray)
-                            .frame(width: 50, height: 50)
-                    }
-                  
-                    
-                    Text(entry.repo.name)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .minimumScaleFactor(0.6)
-                        .lineLimit(1)
-                    
-                }
-                .padding(.bottom)
-                HStack {
-                    StatLabel(value: entry.repo.watchers, systemImageName: "star.fill")
-                    StatLabel(value: entry.repo.forks, systemImageName: "tuningfork")
-                    if entry.repo.hasIssues {
-                        StatLabel(value: entry.repo.openIssues, systemImageName: "exclamationmark.triangle.fill")
-                    }
-                }
-                
-            }
-            
-            Spacer()
-            
-            VStack {
-                Text("\(daysSinceLastActivity)")
-                    .bold()
-                    .font(.system(size: 70))
-                    .frame(width: 90)
-                    .minimumScaleFactor(0.6)
-                    .lineLimit(1)
-                    .foregroundStyle(daysSinceLastActivity > 50 ? Color.pink : Color.green)
-                
-                Text("days ago")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                
-            }
-        }
-    }
     
-    func calculateDaySinceLastActivity(from dateString: String) -> Int {
-        let lastActivityDate = formatter.date(from: dateString) ?? .now
-        let daysSinceLastActivity = Calendar.current.dateComponents([.day], from: lastActivityDate, to: .now).day ?? 0
-        return daysSinceLastActivity
+    var body: some View {
+        RepoMediumView(repo: entry.repo)
     }
 }
 
@@ -137,22 +77,4 @@ var body: some WidgetConfiguration {
 } timeline: {
     RepoEntry(date: .now, repo: Repository.placeHolder, avatarImageData: Data())
     RepoEntry(date: .now, repo: Repository.placeHolder, avatarImageData: Data())
-}
-
-fileprivate struct StatLabel: View {
-    
-    let value: Int
-    let systemImageName: String
-    
-    var body: some View {
-        Label {
-            Text("\(value)")
-                .font(.footnote)
-        } icon: {
-            Image(systemName: systemImageName)
-                .foregroundStyle(.green)
-        }
-        .fontWeight(.medium)
-
-    }
 }

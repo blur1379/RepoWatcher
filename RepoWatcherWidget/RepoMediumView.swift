@@ -18,21 +18,21 @@ struct RepoMediumView: View {
         HStack {
             VStack {
                 HStack {
-                    if let imageData = UIImage(data: avatarImageData) {
-                        Image(uiImage: imageData)
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                    } else {
+//                    if let imageData = UIImage(data: avatarImageData) {
+//                        Image(uiImage: imageData)
+//                            .resizable()
+//                            .frame(width: 50, height: 50)
+//                            .clipShape(Circle())
+//                    } else {
                         Image(systemName: "person.circle")
                             .resizable()
                             .scaledToFit()
                             .foregroundStyle(Color.gray)
                             .frame(width: 50, height: 50)
-                    }
+//                    }
                   
                     
-                    Text(entry.repo.name)
+                    Text(repo.name)
                         .font(.title2)
                         .fontWeight(.semibold)
                         .minimumScaleFactor(0.6)

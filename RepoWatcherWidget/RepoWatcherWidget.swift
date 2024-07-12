@@ -46,10 +46,21 @@ struct RepoEntry: TimelineEntry {
 }
 
 struct RepoWatcherWidgetEntryView : View {
+    @Environment(\.widgetFamily) var family
     var entry: Provider.Entry
     
     var body: some View {
-        RepoMediumView(repo: entry.repo)
+        switch family {
+        case .systemMedium:
+            RepoMediumView(repo: entry.repo)
+        case .systemLarge:
+            RepoMediumView(repo: entry.repo)
+        case .systemExtraLarge, .systemSmall, .accessoryCircular, .accessoryRectangular, .accessoryInline:
+            EmptyView()
+        @unknown default:
+            EmptyView()
+        }
+       
     }
 }
 

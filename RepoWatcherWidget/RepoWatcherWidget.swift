@@ -80,6 +80,7 @@ var body: some WidgetConfiguration {
     }
     .configurationDisplayName("My Widget")
     .description("This is an example widget.")
+    .supportedFamilies([.systemLarge, .systemMedium])
 }
 }
 

@@ -54,7 +54,12 @@ struct RepoWatcherWidgetEntryView : View {
         case .systemMedium:
             RepoMediumView(repo: entry.repo)
         case .systemLarge:
-            RepoMediumView(repo: entry.repo)
+            VStack(spacing: 36) {
+                RepoMediumView(repo: entry.repo)
+                
+                RepoMediumView(repo: entry.repo)
+            }
+          
         case .systemExtraLarge, .systemSmall, .accessoryCircular, .accessoryRectangular, .accessoryInline:
             EmptyView()
         @unknown default:
@@ -84,7 +89,7 @@ var body: some WidgetConfiguration {
 }
 }
 
-#Preview(as: .systemMedium) {
+#Preview(as: .systemLarge) {
     RepoWatcherWidget()
 } timeline: {
     RepoEntry(date: .now, repo: Repository.placeHolder, avatarImageData: Data())

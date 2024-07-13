@@ -26,7 +26,15 @@ struct Provider: TimelineProvider {
                 var repo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
                 let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
                 repo.avatarData = avatarImageData ?? Data()
-                let entry = RepoEntry(date: .now, repo: repo, bottomRepo: nil )
+                // using context family for specified code
+                var bottomRepo: Repository?
+                if context.family == .systemLarge {
+                    bottomRepo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
+                    let avatarImageData = await NetworkManager.shared.downloadImageData(from: bottomRepo!.owner.avatarUrl)
+                    bottomRepo?.avatarData = avatarImageData ?? Data()
+                }
+                
+                let entry = RepoEntry(date: .now, repo: repo, bottomRepo: bottomRepo )
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
             } catch {

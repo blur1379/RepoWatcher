@@ -14,22 +14,23 @@ struct RepoMediumView: View {
     var daysSinceLastActivity: Int {
         calculateDaySinceLastActivity(from: repo.pushedAt)
     }
+    
     var body: some View {
         HStack {
             VStack {
                 HStack {
-//                    if let imageData = UIImage(data: avatarImageData) {
-//                        Image(uiImage: imageData)
-//                            .resizable()
-//                            .frame(width: 50, height: 50)
-//                            .clipShape(Circle())
-//                    } else {
+                    if let imageData = UIImage(data: repo.avatarData) {
+                        Image(uiImage: imageData)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                    } else {
                         Image(systemName: "person.circle")
                             .resizable()
                             .scaledToFit()
                             .foregroundStyle(Color.gray)
                             .frame(width: 50, height: 50)
-//                    }
+                    }
                   
                     
                     Text(repo.name)

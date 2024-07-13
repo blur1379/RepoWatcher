@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> RepoEntry {
-        RepoEntry(date: Date(), repo: Repository.placeHolder)
+        RepoEntry(date: Date(), repo: Repository.placeHolder, bottomRepo: Repository.placeHolder)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (RepoEntry) -> ()) {
-        let entry = RepoEntry(date: Date(), repo: Repository.placeHolder)
+        let entry = RepoEntry(date: Date(), repo: Repository.placeHolder, bottomRepo: Repository.placeHolder)
         completion(entry)
     }
 
@@ -26,7 +26,7 @@ struct Provider: TimelineProvider {
                 var repo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
                 let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
                 repo.avatarData = avatarImageData ?? Data()
-                let entry = RepoEntry(date: .now, repo: repo)
+                let entry = RepoEntry(date: .now, repo: repo, bottomRepo: nil )
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
             } catch {
@@ -43,6 +43,7 @@ struct Provider: TimelineProvider {
 struct RepoEntry: TimelineEntry {
     let date: Date
     let repo: Repository
+    let bottomRepo: Repository?
 }
 
 struct RepoWatcherWidgetEntryView : View {
@@ -92,6 +93,5 @@ var body: some WidgetConfiguration {
 #Preview(as: .systemLarge) {
     RepoWatcherWidget()
 } timeline: {
-    RepoEntry(date: .now, repo: Repository.placeHolder)
-    RepoEntry(date: .now, repo: Repository.placeHolder)
+    RepoEntry(date: .now, repo: Repository.placeHolder,bottomRepo: Repository.placeHolder)
 }

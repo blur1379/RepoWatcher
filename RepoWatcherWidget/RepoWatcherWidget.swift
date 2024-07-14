@@ -65,7 +65,9 @@ struct RepoWatcherWidgetEntryView : View {
         case .systemLarge:
             VStack(spacing: 36) {
                 RepoMediumView(repo: entry.repo)
-                RepoMediumView(repo: MockData.repoTow)
+                if let bottomRepo = entry.bottomRepo {
+                    RepoMediumView(repo: bottomRepo)
+                }
             }
           
         case .systemExtraLarge, .systemSmall, .accessoryCircular, .accessoryRectangular, .accessoryInline:

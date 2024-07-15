@@ -14,6 +14,8 @@
 		A95CB05C2C39D39F00385DCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A95CB05B2C39D39F00385DCB /* Preview Assets.xcassets */; };
 		A9652F3C2C3DCECC00CDB0C9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */; };
 		A9652F3D2C3DCECC00CDB0C9 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */; };
+		A96566602C454DA6005EC78A /* ContributorWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965665F2C454DA6005EC78A /* ContributorWidget.swift */; };
+		A96566622C45592D005EC78A /* ContributorMediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96566612C45592D005EC78A /* ContributorMediumView.swift */; };
 		A987779C2C3F25C700F64804 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987779B2C3F25C700F64804 /* NetworkManager.swift */; };
 		A987779D2C3F25C700F64804 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A987779B2C3F25C700F64804 /* NetworkManager.swift */; };
 		A98D480F2C3B1C6F00FA184F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A98D480E2C3B1C6E00FA184F /* WidgetKit.framework */; };
@@ -57,6 +59,8 @@
 		A95CB0582C39D39F00385DCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A95CB05B2C39D39F00385DCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		A965665F2C454DA6005EC78A /* ContributorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorWidget.swift; sourceTree = "<group>"; };
+		A96566612C45592D005EC78A /* ContributorMediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorMediumView.swift; sourceTree = "<group>"; };
 		A987779B2C3F25C700F64804 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A98D480C2C3B1C6E00FA184F /* RepoWatcherWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RepoWatcherWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A98D480E2C3B1C6E00FA184F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -148,10 +152,12 @@
 		A98D48122C3B1C6F00FA184F /* RepoWatcherWidget */ = {
 			isa = PBXGroup;
 			children = (
-				A93552862C42B3F600FDB40E /* Mock */,
 				A98D48132C3B1C6F00FA184F /* RepoWatcherWidgetBundle.swift */,
 				A98D48152C3B1C6F00FA184F /* CompactRepoWidget.swift */,
+				A965665F2C454DA6005EC78A /* ContributorWidget.swift */,
 				A99E8D312C3FFE5000028375 /* RepoMediumView.swift */,
+				A96566612C45592D005EC78A /* ContributorMediumView.swift */,
+				A93552862C42B3F600FDB40E /* Mock */,
 				A98D48172C3B1C6F00FA184F /* Assets.xcassets */,
 				A98D48192C3B1C6F00FA184F /* Info.plist */,
 			);
@@ -270,10 +276,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A96566602C454DA6005EC78A /* ContributorWidget.swift in Sources */,
 				A987779C2C3F25C700F64804 /* NetworkManager.swift in Sources */,
 				A93552882C42B40600FDB40E /* MockData.swift in Sources */,
 				A99E8D322C3FFE5000028375 /* RepoMediumView.swift in Sources */,
 				A98D48162C3B1C6F00FA184F /* CompactRepoWidget.swift in Sources */,
+				A96566622C45592D005EC78A /* ContributorMediumView.swift in Sources */,
 				A98D48142C3B1C6F00FA184F /* RepoWatcherWidgetBundle.swift in Sources */,
 				A9652F3C2C3DCECC00CDB0C9 /* Repository.swift in Sources */,
 			);

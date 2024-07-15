@@ -80,23 +80,23 @@ struct CompactRepoEntryView : View {
 }
 
 struct CompactRepoWidget: Widget {
-let kind: String = "CompactRepoWidget"
-
-var body: some WidgetConfiguration {
-    StaticConfiguration(kind: kind, provider: CompactRepoProvider()) { entry in
-        if #available(iOS 17.0, *) {
-            CompactRepoEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
-        } else {
-            CompactRepoEntryView(entry: entry)
-                .padding()
-                .background()
+    let kind: String = "CompactRepoWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: CompactRepoProvider()) { entry in
+            if #available(iOS 17.0, *) {
+                CompactRepoEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                CompactRepoEntryView(entry: entry)
+                    .padding()
+                    .background()
+            }
         }
+        .configurationDisplayName("My Widget")
+        .description("This is an example widget.")
+        .supportedFamilies([.systemLarge, .systemMedium])
     }
-    .configurationDisplayName("My Widget")
-    .description("This is an example widget.")
-    .supportedFamilies([.systemLarge, .systemMedium])
-}
 }
 
 #Preview(as: .systemLarge) {

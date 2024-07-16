@@ -16,6 +16,7 @@ struct Repository {
     let openIssues: Int
     let pushedAt: String
     var avatarData: Data
+    var contributors: [Contributor]
 
 }
 
@@ -30,14 +31,17 @@ extension Repository {
         let pushedAt: String
         
         var repo: Repository {
-            Repository(name: name,
-                       owner: owner,
-                       hasIssues: hasIssues,
-                       forks: forks,
-                       watchers: watchers,
-                       openIssues: openIssues,
-                       pushedAt: pushedAt,
-                       avatarData: Data())
+            Repository(
+                name: name,
+                owner: owner,
+                hasIssues: hasIssues,
+                forks: forks,
+                watchers: watchers,
+                openIssues: openIssues,
+                pushedAt: pushedAt,
+                avatarData: Data(),
+                contributors: []
+            )
         }
     }
 }

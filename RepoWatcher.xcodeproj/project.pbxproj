@@ -25,6 +25,8 @@
 		A98D48182C3B1C6F00FA184F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A98D48172C3B1C6F00FA184F /* Assets.xcassets */; };
 		A98D481C2C3B1C6F00FA184F /* RepoWatcherWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A98D480C2C3B1C6E00FA184F /* RepoWatcherWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A99E8D322C3FFE5000028375 /* RepoMediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99E8D312C3FFE5000028375 /* RepoMediumView.swift */; };
+		A9B38D632C46FB3F00491D8A /* Contributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B38D622C46FB3F00491D8A /* Contributor.swift */; };
+		A9B38D642C46FB3F00491D8A /* Contributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B38D622C46FB3F00491D8A /* Contributor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,7 @@
 		A98D48172C3B1C6F00FA184F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A98D48192C3B1C6F00FA184F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A99E8D312C3FFE5000028375 /* RepoMediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoMediumView.swift; sourceTree = "<group>"; };
+		A9B38D622C46FB3F00491D8A /* Contributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,7 @@
 				A95CB0542C39D39D00385DCB /* RepoWatcherApp.swift */,
 				A95CB0562C39D39D00385DCB /* ContentView.swift */,
 				A9652F3B2C3DCECC00CDB0C9 /* Repository.swift */,
+				A9B38D622C46FB3F00491D8A /* Contributor.swift */,
 				A987779B2C3F25C700F64804 /* NetworkManager.swift */,
 				A95CB0582C39D39F00385DCB /* Assets.xcassets */,
 				A95CB05A2C39D39F00385DCB /* Preview Content */,
@@ -266,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A987779D2C3F25C700F64804 /* NetworkManager.swift in Sources */,
+				A9B38D632C46FB3F00491D8A /* Contributor.swift in Sources */,
 				A95CB0572C39D39D00385DCB /* ContentView.swift in Sources */,
 				A95CB0552C39D39D00385DCB /* RepoWatcherApp.swift in Sources */,
 				A9652F3D2C3DCECC00CDB0C9 /* Repository.swift in Sources */,
@@ -277,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A96566602C454DA6005EC78A /* ContributorWidget.swift in Sources */,
+				A9B38D642C46FB3F00491D8A /* Contributor.swift in Sources */,
 				A987779C2C3F25C700F64804 /* NetworkManager.swift in Sources */,
 				A93552882C42B40600FDB40E /* MockData.swift in Sources */,
 				A99E8D322C3FFE5000028375 /* RepoMediumView.swift in Sources */,

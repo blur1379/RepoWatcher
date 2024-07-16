@@ -37,7 +37,6 @@ struct ContributorEntryView : View {
     var body: some View {
         VStack(spacing: 20) {
             RepoMediumView(repo: entry.repo)
-            
             ContributorMediumView(repo: entry.repo)
             .padding(.vertical)
         }

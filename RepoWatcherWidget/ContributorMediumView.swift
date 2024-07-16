@@ -21,10 +21,10 @@ struct ContributorMediumView: View {
                 Spacer()
             }
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2),alignment: .leading, spacing: 20) {
-                ForEach(0..<4) { i in
+                ForEach(repo.contributors) { contributor in
                     HStack {
                         Group {
-                            if let image = UIImage(data: repo.avatarData) {
+                            if let image = UIImage(data: contributor.avatarData) {
                                 Image(uiImage: image)
                                     .resizable()
                                     .scaledToFit()
@@ -40,10 +40,10 @@ struct ContributorMediumView: View {
                         .clipShape(Circle())
                         
                         VStack (alignment: .leading) {
-                            Text("Sean Allen")
+                            Text(contributor.login)
                                 .font(.caption)
                                 .minimumScaleFactor(0.7)
-                            Text("42")
+                            Text("\(contributor.contributions)")
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
                         }

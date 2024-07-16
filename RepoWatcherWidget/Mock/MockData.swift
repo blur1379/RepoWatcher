@@ -19,7 +19,8 @@ struct MockData {
         watchers: 123,
         openIssues: 55,
         pushedAt: "2022-08-09T18:19:30Z",
-        avatarData: Data()
+        avatarData: Data(), 
+        contributors: []
     )
     
     static let repoTow = Repository(
@@ -32,6 +33,7 @@ struct MockData {
         watchers: 34,
         openIssues: 43,
         pushedAt: "2024-05-09T18:19:30Z",
-        avatarData: Data()
+        avatarData: Data(),
+        contributors: []
     )
 }

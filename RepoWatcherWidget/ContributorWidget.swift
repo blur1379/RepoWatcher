@@ -14,7 +14,7 @@ struct ContributorProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping @Sendable (ContributorEntry) -> Void) {
-        let entry = ContributorEntry(date: .now, repo: MockData.repoTow)
+        let entry = ContributorEntry(date: .now, repo: MockData.repoOne)
         completion(entry)
     }
     
@@ -23,7 +23,6 @@ struct ContributorProvider: TimelineProvider {
             let nextUpdate = Date().addingTimeInterval(43200)
             do {
                 let repoToShow = RepoURL.repoWatcher
-                let entry = ContributorEntry(date: .now, repo: MockData.repoOne)
                 
                 // get repo
                 var repo = try await NetworkManager.shared.getRepo(at: repoToShow)
@@ -41,6 +40,9 @@ struct ContributorProvider: TimelineProvider {
                     topFour[i].avatarData = avatarData ?? Data()
                 }
                 
+                repo.contributors = topFour
+                
+                let entry = ContributorEntry(date: .now, repo: repo)
                 let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeLine)
             } catch {

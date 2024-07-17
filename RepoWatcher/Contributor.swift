@@ -21,7 +21,7 @@ extension Contributor {
         let avatarUrl: String
         let contributions: Int
         
-        var contributor: Contributor {
+        var contributors: Contributor {
             Contributor(
                 login: login,
                 avatarUrl: avatarUrl,

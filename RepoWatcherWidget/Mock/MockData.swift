@@ -20,7 +20,10 @@ struct MockData {
         openIssues: 55,
         pushedAt: "2022-08-09T18:19:30Z",
         avatarData: Data(), 
-        contributors: []
+        contributors: [Contributor(login: "Saen Allen", avatarUrl: "", contributions: 32, avatarData: Data()),
+                       Contributor(login: "Mohammad Blur", avatarUrl: "", contributions: 34, avatarData: Data()),
+                       Contributor(login: "Micheal Jordan", avatarUrl: "", contributions: 6, avatarData: Data()),
+                       Contributor(login: "Hamid", avatarUrl: "", contributions: 34, avatarData: Data())]
     )
     
     static let repoTow = Repository(

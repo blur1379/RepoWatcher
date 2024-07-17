@@ -21,18 +21,23 @@ struct ContributorProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping @Sendable (Timeline<ContributorEntry>) -> Void) {
         Task {
             let nextUpdate = Date().addingTimeInterval(43200)
-            let entry = ContributorEntry(date: .now, repo: MockData.repoOne)
-            
-            // get repo
-            var repo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
-            let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
-            repo.avatarData = avatarImageData ?? Data()
-            
-            //Get Contribution
-            
-            
-            let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
-            completion(timeLine)
+            do {
+                let repoToShow = RepoURL.repoWatcher
+                let entry = ContributorEntry(date: .now, repo: MockData.repoOne)
+                
+                // get repo
+                var repo = try await NetworkManager.shared.getRepo(at: repoToShow)
+                let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
+                repo.avatarData = avatarImageData ?? Data()
+                
+                //Get Contribution
+                let contributors = try await NetworkManager.shared.getContributor(at: repoToShow + "/contributors")
+                
+                let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
+                completion(timeLine)
+            } catch {
+                print("❌ Error - \(error.localizedDescription)")
+            }
         }
     }
 }

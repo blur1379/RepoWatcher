@@ -19,10 +19,21 @@ struct ContributorProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping @Sendable (Timeline<ContributorEntry>) -> Void) {
-        let nextUpdate = Date().addingTimeInterval(43200)
-        let entry = ContributorEntry(date: .now, repo: MockData.repoOne)
-        let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
-        completion(timeLine)
+        Task {
+            let nextUpdate = Date().addingTimeInterval(43200)
+            let entry = ContributorEntry(date: .now, repo: MockData.repoOne)
+            
+            // get repo
+            var repo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
+            let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
+            repo.avatarData = avatarImageData ?? Data()
+            
+            //Get Contribution
+            
+            
+            let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
+            completion(timeLine)
+        }
     }
 }
 

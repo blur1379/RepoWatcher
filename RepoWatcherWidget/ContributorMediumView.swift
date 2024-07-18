@@ -53,7 +53,7 @@ struct ContributorMediumView: View {
             
             if repo.contributors.count < 3 {
                 Spacer()
-                    .frame(height: 20)
+                    .frame(height: 20 )
             }
         }
     }

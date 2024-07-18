@@ -77,13 +77,13 @@ struct RepoMediumView: View {
     }
 }
 
-struct RepoMediumView_Preview: PreviewProvider {
-    static var previews: some View {
-        RepoMediumView(repo: MockData.repoOne )
-            .containerBackground(.fill.tertiary, for: .widget)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
-}
+#Preview(as: .systemMedium, widget: {
+    CompactRepoWidget()
+}, timeline: {
+    CompactRepoEntry(date: .now, repo: MockData.repoOne, bottomRepo: MockData.repoTow)
+})
+   
+  
 
 fileprivate struct StatLabel: View {
     

@@ -1,5 +1,5 @@
 //
-//  ContributorWidget.swift
+//  SingleRepoWidget.swift
 //  RepoWatcherWidgetExtension
 //
 //  Created by Mohammad Blur on 7/15/24.
@@ -8,17 +8,17 @@
 import SwiftUI
 import WidgetKit
 
-struct ContributorProvider: TimelineProvider {
-    func placeholder(in context: Context) -> ContributorEntry {
-        ContributorEntry(date: .now, repo: MockData.repoOne)
+struct SingleRepoProvider: TimelineProvider {
+    func placeholder(in context: Context) -> SingleRepoEntry {
+        SingleRepoEntry(date: .now, repo: MockData.repoOne)
     }
     
-    func getSnapshot(in context: Context, completion: @escaping @Sendable (ContributorEntry) -> Void) {
-        let entry = ContributorEntry(date: .now, repo: MockData.repoOne)
+    func getSnapshot(in context: Context, completion: @escaping @Sendable (SingleRepoEntry) -> Void) {
+        let entry = SingleRepoEntry(date: .now, repo: MockData.repoOne)
         completion(entry)
     }
     
-    func getTimeline(in context: Context, completion: @escaping @Sendable (Timeline<ContributorEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping @Sendable (Timeline<SingleRepoEntry>) -> Void) {
         Task {
             let nextUpdate = Date().addingTimeInterval(43200)
             do {
@@ -42,7 +42,7 @@ struct ContributorProvider: TimelineProvider {
                 
                 repo.contributors = topFour
                 
-                let entry = ContributorEntry(date: .now, repo: repo)
+                let entry = SingleRepoEntry(date: .now, repo: repo)
                 let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeLine)
             } catch {
@@ -52,47 +52,56 @@ struct ContributorProvider: TimelineProvider {
     }
 }
 
-struct ContributorEntry: TimelineEntry {
+struct SingleRepoEntry: TimelineEntry {
     var date: Date
     var repo: Repository
 }
 
-struct ContributorEntryView : View {
-    var entry: ContributorEntry
+struct SingleRepoEntryView : View {
+    @Environment(\.widgetFamily) var family
+    var entry: SingleRepoEntry
     
     var body: some View {
         VStack(spacing: 20) {
-            RepoMediumView(repo: entry.repo)
-            ContributorMediumView(repo: entry.repo)
-            .padding(.vertical)
+            
+            switch family {
+            case .systemMedium:
+                RepoMediumView(repo: entry.repo)
+            case .systemLarge:
+                RepoMediumView(repo: entry.repo)
+                ContributorMediumView(repo: entry.repo)
+                .padding(.vertical)
+            default:
+                EmptyView()
+            }
         }
     }
 }
 
 
-struct ContributorWidget: Widget {
-    let kind: String = "ContributorWidget"
+struct SingleRepoWidget: Widget {
+    let kind: String = "SingleRepoWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: ContributorProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: SingleRepoProvider()) { entry in
             if #available(iOS 17.0, *) {
-                ContributorEntryView(entry: entry)
+                SingleRepoEntryView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)
             } else {
-                ContributorEntryView(entry: entry)
+                SingleRepoEntryView(entry: entry)
                     .padding()
                     .background()
             }
         }
-        .configurationDisplayName("Contrybutor")
-        .description("Keep track of a repository's contribuors.")
-        .supportedFamilies([.systemLarge])
+        .configurationDisplayName("Single Repo")
+        .description("Track a single repository's .")
+        .supportedFamilies([.systemMedium,.systemLarge])
     }
 }
 
-#Preview(as: .systemLarge) {
-    ContributorWidget()
+#Preview(as: .systemMedium) {
+    SingleRepoWidget()
 } timeline: {
-    ContributorEntry(date: .now, repo: MockData.repoOne)
+    SingleRepoEntry(date: .now, repo: MockData.repoOne)
 }
 

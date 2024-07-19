@@ -61,7 +61,7 @@ struct RepoMediumView: View {
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
                     .foregroundStyle(daysSinceLastActivity > 50 ? Color.pink : Color.green)
-                
+                    .contentTransition(.numericText() )
                 Text("days ago")
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -80,7 +80,7 @@ struct RepoMediumView: View {
 #Preview(as: .systemMedium, widget: {
     CompactRepoWidget()
 }, timeline: {
-    CompactRepoEntry(date: .now, repo: MockData.repoOne, bottomRepo: MockData.repoTow)
+    CompactRepoEntry(date: .now, repo: MockData.repoOne, bottomRepo: nil)
 })
    
   
@@ -94,6 +94,7 @@ fileprivate struct StatLabel: View {
         Label {
             Text("\(value)")
                 .font(.footnote)
+                .contentTransition(.numericText())
         } icon: {
             Image(systemName: systemImageName)
                 .foregroundStyle(.green)

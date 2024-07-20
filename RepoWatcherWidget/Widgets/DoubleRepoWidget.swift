@@ -10,11 +10,11 @@ import SwiftUI
 
 struct DoubleRepoProvider: TimelineProvider {
     func placeholder(in context: Context) -> DoubleRepoEntry {
-        DoubleRepoEntry(date: Date(), repo: MockData.repoOne, bottomRepo: MockData.repoTow)
+        DoubleRepoEntry(date: Date(), topRepo: MockData.repoOne, bottomRepo: MockData.repoTow)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DoubleRepoEntry) -> ()) {
-        let entry = DoubleRepoEntry(date: Date(), repo: MockData.repoOne, bottomRepo: MockData.repoTow)
+        let entry = DoubleRepoEntry(date: Date(), topRepo: MockData.repoOne, bottomRepo: MockData.repoTow)
         completion(entry)
     }
 
@@ -24,17 +24,15 @@ struct DoubleRepoProvider: TimelineProvider {
             
             do {
                 var repo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
-                let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
-                repo.avatarData = avatarImageData ?? Data()
+                let topAvatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
+                repo.avatarData = topAvatarImageData ?? Data()
                 // using context family for specified code
-                var bottomRepo: Repository?
-                if context.family == .systemLarge {
-                    bottomRepo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
-                    let avatarImageData = await NetworkManager.shared.downloadImageData(from: bottomRepo!.owner.avatarUrl)
-                    bottomRepo?.avatarData = avatarImageData ?? Data()
-                }
+                var bottomRepo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
+                let bottonAvatarImageData = await NetworkManager.shared.downloadImageData(from: bottomRepo.owner.avatarUrl)
+                bottomRepo.avatarData = bottonAvatarImageData ?? Data()
+            
                 
-                let entry = DoubleRepoEntry(date: .now, repo: repo, bottomRepo: bottomRepo )
+                let entry = DoubleRepoEntry(date: .now, topRepo: repo, bottomRepo: bottomRepo )
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
             } catch {
@@ -50,37 +48,24 @@ struct DoubleRepoProvider: TimelineProvider {
 
 struct DoubleRepoEntry: TimelineEntry {
     let date: Date
-    let repo: Repository
-    let bottomRepo: Repository?
+    let topRepo: Repository
+    let bottomRepo: Repository
 }
 
 struct DoubleRepoEntryView : View {
-    @Environment(\.widgetFamily) var family
+    
     var entry: DoubleRepoProvider.Entry
     
     var body: some View {
-        switch family {
-        case .systemMedium:
-            RepoMediumView(repo: entry.repo)
-        case .systemLarge:
-            VStack(spacing: 76) {
-                RepoMediumView(repo: entry.repo)
-                if let bottomRepo = entry.bottomRepo {
-                    RepoMediumView(repo: bottomRepo)
-                }
-            }
-          
-        case .systemExtraLarge, .systemSmall, .accessoryCircular, .accessoryRectangular, .accessoryInline:
-            EmptyView()
-        @unknown default:
-            EmptyView()
+        VStack(spacing: 76) {
+            RepoMediumView(repo: entry.topRepo)
+            RepoMediumView(repo: entry.bottomRepo)
         }
-       
     }
 }
 
 struct DoubleRepoWidget: Widget {
-    let kind: String = "CompactRepoWidget"
+    let kind: String = "DoubleRepoWidget"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: DoubleRepoProvider()) { entry in
@@ -95,12 +80,12 @@ struct DoubleRepoWidget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
-        .supportedFamilies([.systemLarge, .systemMedium])
+        .supportedFamilies([.systemLarge])
     }
 }
 
 #Preview(as: .systemLarge) {
     DoubleRepoWidget()
 } timeline: {
-    DoubleRepoEntry(date: .now, repo: MockData.repoOne,bottomRepo: MockData.repoTow)
+    DoubleRepoEntry(date: .now, topRepo: MockData.repoOne,bottomRepo: MockData.repoTow)
 }

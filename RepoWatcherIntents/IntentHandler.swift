@@ -20,7 +20,6 @@ extension IntentHandler: SelectSingleRepoIntentHandling {
         guard let repos = UserDefaults.shared.value(forKey: UserDefaults.repoKey) as? [String] else {
             throw UserDefaultsError.retrieval
         }
-        
         return INObjectCollection(items: repos as [NSString])
     }
     

@@ -35,7 +35,7 @@
 					<key>INIntentParameterConfigurable</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
-					<string>Repo</string>
+					<string>repo</string>
 					<key>INIntentParameterDisplayNameID</key>
 					<string>zzawOm</string>
 					<key>INIntentParameterDisplayPriority</key>

@@ -32,9 +32,10 @@ struct ContributorMediumView: View {
                                 Image(systemName: "person")
                                     .resizable()
                                     .scaledToFit()
+                                    .frame(width: 22, height: 22)
                             }
                         }
-                        .frame(width: 22, height: 22)
+                        
                         .frame(width: 44, height: 44)
                         .background(.secondary.opacity(0.2))
                         .clipShape(Circle())

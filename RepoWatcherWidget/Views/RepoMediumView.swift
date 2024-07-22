@@ -80,7 +80,7 @@ struct RepoMediumView: View {
 #Preview(as: .systemMedium, widget: {
     DoubleRepoWidget()
 }, timeline: {
-    DoubleRepoEntry(date: .now, repo: MockData.repoOne, bottomRepo: nil)
+    DoubleRepoEntry(date: .now, topRepo: MockData.repoOne, bottomRepo:  MockData.repoTow)
 })
    
   

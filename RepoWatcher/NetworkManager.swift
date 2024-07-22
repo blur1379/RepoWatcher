@@ -70,6 +70,7 @@ enum NetworkError: Error {
 }
 
 enum RepoURL {
+    static let prefix = "https://api.github.com/repos/"
     static let swiftNews = "https://api.github.com/repos/sallen0400/swift-news"
     static let repoWatcher = "https://api.github.com/repos/blur1379/RepoWatcher"
     static let publish = "https://api.github.com/repos/johnsundell/publish"

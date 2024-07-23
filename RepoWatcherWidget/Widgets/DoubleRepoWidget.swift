@@ -8,28 +8,24 @@
 import WidgetKit
 import SwiftUI
 
-struct DoubleRepoProvider: TimelineProvider {
-    func placeholder(in context: Context) -> DoubleRepoEntry {
-        DoubleRepoEntry(date: Date(), topRepo: MockData.repoOne, bottomRepo: MockData.repoTow)
-    }
-
-    func getSnapshot(in context: Context, completion: @escaping (DoubleRepoEntry) -> ()) {
+struct DoubleRepoProvider: IntentTimelineProvider {
+    func getSnapshot(for configuration: SelectTwoReposIntent, in context: Context, completion: @escaping @Sendable (DoubleRepoEntry) -> Void) {
         let entry = DoubleRepoEntry(date: Date(), topRepo: MockData.repoOne, bottomRepo: MockData.repoTow)
         completion(entry)
     }
-
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    
+    func getTimeline(for configuration: SelectTwoReposIntent, in context: Context, completion: @escaping @Sendable (Timeline<DoubleRepoEntry>) -> Void) {
         Task {
             let nextUpdate = Date().addingTimeInterval(43200) // 12 hours in seconds
             
             do {
-                var repo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
+                var repo = try await NetworkManager.shared.getRepo(at: RepoURL.prefix + configuration.topRepo!)
                 let topAvatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
                 repo.avatarData = topAvatarImageData ?? Data()
                 // using context family for specified code
-                var bottomRepo = try await NetworkManager.shared.getRepo(at: RepoURL.repoWatcher)
-                let bottonAvatarImageData = await NetworkManager.shared.downloadImageData(from: bottomRepo.owner.avatarUrl)
-                bottomRepo.avatarData = bottonAvatarImageData ?? Data()
+                var bottomRepo = try await NetworkManager.shared.getRepo(at: RepoURL.prefix + configuration.bottomRepo!)
+                let bottomAvatarImageData = await NetworkManager.shared.downloadImageData(from: bottomRepo.owner.avatarUrl)
+                bottomRepo.avatarData = bottomAvatarImageData ?? Data()
             
                 
                 let entry = DoubleRepoEntry(date: .now, topRepo: repo, bottomRepo: bottomRepo )
@@ -40,6 +36,16 @@ struct DoubleRepoProvider: TimelineProvider {
             }
         }
     }
+    
+    typealias Entry = DoubleRepoEntry
+    
+    typealias Intent = SelectTwoReposIntent
+    
+    func placeholder(in context: Context) -> DoubleRepoEntry {
+        DoubleRepoEntry(date: Date(), topRepo: MockData.repoOne, bottomRepo: MockData.repoTow)
+    }
+
+ 
 
 //    func relevances() async -> WidgetRelevances<Void> {
 //        // Generate a list containing the contexts this widget is relevant in.
@@ -68,7 +74,7 @@ struct DoubleRepoWidget: Widget {
     let kind: String = "DoubleRepoWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: DoubleRepoProvider()) { entry in
+        IntentConfiguration(kind: kind, intent: SelectTwoReposIntent.self, provider: DoubleRepoProvider()) { entry in
             if #available(iOS 17.0, *) {
                 DoubleRepoEntryView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)

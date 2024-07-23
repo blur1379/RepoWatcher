@@ -43,4 +43,12 @@ extension IntentHandler: SelectTwoReposIntentHandling {
         return INObjectCollection(items: repos as [NSString])
     }
     
+    func defaultTopRepo(for intent: SelectTwoReposIntent) -> String? {
+        return "apple/swift"
+    }
+    
+    func defaultBottomRepo(for intent: SelectTwoReposIntent) -> String? {
+        return "apple/swift"
+    }
+    
 }

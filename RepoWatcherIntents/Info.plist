@@ -16,6 +16,7 @@
 				<string>INSendMessageIntent</string>
 				<string>INSetMessageAttributeIntent</string>
 				<string>SelectSingleRepoIntent</string>
+				<string>SelectTwoReposIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

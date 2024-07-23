@@ -27,3 +27,15 @@ extension IntentHandler: SelectSingleRepoIntentHandling {
         return "blur1379/RepoWatcher"
     }
 }
+
+extension IntentHandler: SelectTwoReposIntentHandling {
+    func provideTopRepoOptionsCollection(for intent: SelectTwoReposIntent) async throws -> INObjectCollection<NSString> {
+        
+    }
+    
+    func provideBottomRepoOptionsCollection(for intent: SelectTwoReposIntent) async throws -> INObjectCollection<NSString> {
+        
+    }
+    
+    
+}

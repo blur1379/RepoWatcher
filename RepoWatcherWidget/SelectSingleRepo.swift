@@ -15,14 +15,18 @@ struct SelectSingleRepo: AppIntent, WidgetConfigurationIntent, CustomIntentMigra
     static var title: LocalizedStringResource = "Select Single Repo"
     static var description = IntentDescription("Choose a repository to watch")
 
-    @Parameter(title: "repo", optionsProvider: StringOptionsProvider())
+    @Parameter(title: "repo", optionsProvider: RepoOptionsProvider())
     var repo: String?
 
-    struct StringOptionsProvider: DynamicOptionsProvider {
+    struct RepoOptionsProvider: DynamicOptionsProvider {
         func results() async throws -> [String] {
-            // TODO: Return possible options here.
-            return []
+            guard let repos = UserDefaults.shared.value(forKey: UserDefaults.repoKey) as? [String] else {
+                throw UserDefaultsError.retrieval
+            }
+            return repos
         }
+        
+        func defaultResult() async -> String? { "blur1379/RepoWatcher" }
     }
 
 }

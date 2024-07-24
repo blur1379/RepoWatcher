@@ -77,13 +77,13 @@ struct RepoMediumView: View {
     }
 }
 
-#Preview(as: .systemMedium, widget: {
-    DoubleRepoWidget()
-}, timeline: {
-    DoubleRepoEntry(date: .now, topRepo: MockData.repoOne, bottomRepo:  MockData.repoTow)
-})
-   
-  
+//#Preview(as: .systemMedium, widget: {
+//    DoubleRepoWidget()
+//}, timeline: {
+//    DoubleRepoEntry(date: .now, topRepo: MockData.repoOne, bottomRepo:  MockData.repoTow)
+//})
+//   
+//  
 
 fileprivate struct StatLabel: View {
     

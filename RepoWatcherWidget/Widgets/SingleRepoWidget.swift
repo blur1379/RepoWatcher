@@ -8,51 +8,52 @@
 import SwiftUI
 import WidgetKit
 
-struct SingleRepoProvider: IntentTimelineProvider {
+struct SingleRepoProvider: AppIntentTimelineProvider {
+    func snapshot(for configuration: SelectSingleRepo, in context: Context) async -> SingleRepoEntry {
+        let entry = SingleRepoEntry(date: .now, repo: MockData.repoOne)
+        return entry
+    }
+    
+    func timeline(for configuration: SelectSingleRepo, in context: Context) async -> Timeline<SingleRepoEntry> {
+        
+        let nextUpdate = Date().addingTimeInterval(43200)
+        do {
+            let repoToShow = RepoURL.prefix + configuration.repo!
+            
+            // get repo
+            var repo = try await NetworkManager.shared.getRepo(at: repoToShow)
+            let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
+            repo.avatarData = avatarImageData ?? Data()
+            
+            if context.family == .systemLarge {
+                //Get Contribution
+                let contributors = try await NetworkManager.shared.getContributor(at: repoToShow + "/contributors")
+                
+                // Filter to just Top 4
+                var topFour = Array(contributors.prefix(4))
+                
+                for i in topFour.indices {
+                    let avatarData = await NetworkManager.shared.downloadImageData(from: topFour[i].avatarUrl)
+                    topFour[i].avatarData = avatarData ?? Data()
+                }
+                
+                repo.contributors = topFour
+            }
+            
+            let entry = SingleRepoEntry(date: .now, repo: repo)
+            let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
+            return timeLine
+        } catch {
+            print("❌ Error - \(error.localizedDescription)")
+        }
+        
+    }
     
     func placeholder(in context: Context) -> SingleRepoEntry {
         SingleRepoEntry(date: .now, repo: MockData.repoOne)
     }
-    
-    func getSnapshot(for configuration: SelectSingleRepoIntent, in context: Context, completion: @escaping @Sendable (SingleRepoEntry) -> Void) {
-        let entry = SingleRepoEntry(date: .now, repo: MockData.repoOne)
-        completion(entry)
-    }
-    
-    func getTimeline(for configuration: SelectSingleRepoIntent, in context: Context, completion: @escaping @Sendable (Timeline<SingleRepoEntry>) -> Void) {
-        Task {
-            let nextUpdate = Date().addingTimeInterval(43200)
-            do {
-                let repoToShow = RepoURL.prefix + configuration.repo!
-                
-                // get repo
-                var repo = try await NetworkManager.shared.getRepo(at: repoToShow)
-                let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
-                repo.avatarData = avatarImageData ?? Data()
-                
-                if context.family == .systemLarge {
-                    //Get Contribution
-                    let contributors = try await NetworkManager.shared.getContributor(at: repoToShow + "/contributors")
-                    
-                    // Filter to just Top 4
-                    var topFour = Array(contributors.prefix(4))
-                    
-                    for i in topFour.indices {
-                        let avatarData = await NetworkManager.shared.downloadImageData(from: topFour[i].avatarUrl)
-                        topFour[i].avatarData = avatarData ?? Data()
-                    }
-                    
-                    repo.contributors = topFour
-                }
-                
-                let entry = SingleRepoEntry(date: .now, repo: repo)
-                let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
-                completion(timeLine)
-            } catch {
-                print("❌ Error - \(error.localizedDescription)")
-            }
-        }
-    }
+ 
+  
 }
 
 struct SingleRepoEntry: TimelineEntry {
@@ -87,7 +88,7 @@ struct SingleRepoWidget: Widget {
     
     var body: some WidgetConfiguration {
         
-        IntentConfiguration(kind: kind, intent: SelectSingleRepoIntent.self, provider: SingleRepoProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SelectSingleRepo.self, provider: SingleRepoProvider()) { entry in
             if #available(iOS 17.0, *) {
                 SingleRepoEntryView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)

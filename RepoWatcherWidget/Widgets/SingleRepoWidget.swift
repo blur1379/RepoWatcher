@@ -9,9 +9,13 @@ import SwiftUI
 import WidgetKit
 
 struct SingleRepoProvider: AppIntentTimelineProvider {
+    
+    func placeholder(in context: Context) -> SingleRepoEntry {
+        SingleRepoEntry(date: .now, repo: MockData.repoOne)
+    }
+    
     func snapshot(for configuration: SelectSingleRepo, in context: Context) async -> SingleRepoEntry {
-        let entry = SingleRepoEntry(date: .now, repo: MockData.repoOne)
-        return entry
+         SingleRepoEntry(date: .now, repo: MockData.repoOne)
     }
     
     func timeline(for configuration: SelectSingleRepo, in context: Context) async -> Timeline<SingleRepoEntry> {
@@ -41,19 +45,15 @@ struct SingleRepoProvider: AppIntentTimelineProvider {
             }
             
             let entry = SingleRepoEntry(date: .now, repo: repo)
-            let timeLine = Timeline(entries: [entry], policy: .after(nextUpdate))
-            return timeLine
+            return Timeline(entries: [entry], policy: .after(nextUpdate))
+            
         } catch {
             print("❌ Error - \(error.localizedDescription)")
+            return Timeline(entries: [], policy: .after(nextUpdate))
         }
         
     }
-    
-    func placeholder(in context: Context) -> SingleRepoEntry {
-        SingleRepoEntry(date: .now, repo: MockData.repoOne)
-    }
- 
-  
+
 }
 
 struct SingleRepoEntry: TimelineEntry {

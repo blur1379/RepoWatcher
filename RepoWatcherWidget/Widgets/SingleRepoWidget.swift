@@ -78,6 +78,18 @@ struct SingleRepoEntryView : View {
             case .accessoryInline:
                 Text("\(entry.repo.name) - \(entry.repo.daysSinceLastActivity) days")
                     
+            case .accessoryCircular:
+                ZStack {
+                    AccessoryWidgetBackground()
+                    VStack {
+                        Text("\(entry.repo.daysSinceLastActivity)")
+                            .font(.headline)
+                        Text("days")
+                            .font(.caption)
+                    }
+                }
+            
+                
             default:
                 EmptyView()
             }

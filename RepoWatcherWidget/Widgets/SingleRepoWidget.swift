@@ -75,6 +75,9 @@ struct SingleRepoEntryView : View {
                 RepoMediumView(repo: entry.repo)
                 ContributorMediumView(repo: entry.repo)
                 .padding(.vertical)
+            case .accessoryInline:
+                Text("\(entry.repo.name) - \(entry.repo.daysSinceLastActivity) days")
+                    
             default:
                 EmptyView()
             }

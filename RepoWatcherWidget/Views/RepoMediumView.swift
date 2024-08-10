@@ -10,10 +10,7 @@ import WidgetKit
 
 struct RepoMediumView: View {
     let repo: Repository
-    let formatter = ISO8601DateFormatter()
-    var daysSinceLastActivity: Int {
-        calculateDaySinceLastActivity(from: repo.pushedAt)
-    }
+
     
     var body: some View {
         HStack {
@@ -70,11 +67,7 @@ struct RepoMediumView: View {
         }
     }
     
-    func calculateDaySinceLastActivity(from dateString: String) -> Int {
-        let lastActivityDate = formatter.date(from: dateString) ?? .now
-        let daysSinceLastActivity = Calendar.current.dateComponents([.day], from: lastActivityDate, to: .now).day ?? 0
-        return daysSinceLastActivity
-    }
+
 }
 
 //#Preview(as: .systemMedium, widget: {

@@ -51,13 +51,13 @@ struct RepoMediumView: View {
             Spacer()
             
             VStack {
-                Text("\(daysSinceLastActivity)")
+                Text("\(repo.daysSinceLastActivity)")
                     .bold()
                     .font(.system(size: 70))
                     .frame(width: 90)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
-                    .foregroundStyle(daysSinceLastActivity > 50 ? Color.pink : Color.green)
+                    .foregroundStyle(repo.daysSinceLastActivity > 50 ? Color.pink : Color.green)
                     .contentTransition(.numericText() )
                 Text("days ago")
                     .font(.caption)
